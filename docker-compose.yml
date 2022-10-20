@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3"
 volumes:
   db-store:
   psysh-store:
@@ -10,7 +10,7 @@ services:
       target: ${APP_BUILD_TARGET:-development}
     volumes:
       - type: bind
-        source: ./project_name
+        source: ./backend
         target: /workspace
       - type: volume
         source: psysh-store
@@ -42,7 +42,7 @@ services:
         mode: host
     volumes:
       - type: bind
-        source: ./project_name
+        source: ./backend
         target: /workspace
 
   db:
@@ -65,11 +65,3 @@ services:
       - MYSQL_USER=${DB_USERNAME:-phper}
       - MYSQL_PASSWORD=${DB_PASSWORD:-secret}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
-
-  # mailhog:
-  #   image: mailhog/mailhog
-  #   ports:
-  #     - target: 8025
-  #       published: ${MAILHOG_PUBLISHED_PORT:-8025}
-  #       protocol: tcp
-  #       mode: host

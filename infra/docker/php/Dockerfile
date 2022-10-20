@@ -1,7 +1,7 @@
 FROM php:7.3-fpm AS base
 
 WORKDIR /workspace
-COPY ./project_name /workspace
+COPY ./backend /workspace
 
 # timezone environment
 ENV TZ=UTC \
@@ -51,9 +51,3 @@ COPY ./infra/docker/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 FROM base AS deploy
 
 COPY ./infra/docker/php/php.deploy.ini /usr/local/etc/php/php.ini
-# COPY ./project_name /workspace
-
-# RUN composer install -q -n --no-ansi --no-dev --no-scripts --no-progress --prefer-dist \
-#   && chmod -R 777 storage bootstrap/cache \
-#   && php artisan optimize:clear \
-#   && php artisan optimize
